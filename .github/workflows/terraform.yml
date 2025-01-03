@@ -1,4 +1,4 @@
-name: 'Terraform AzureAD User Creation with OIDC'
+name: 'Terraform Azure User Creation with OIDC'
 
 on:
   workflow_dispatch:
