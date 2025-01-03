@@ -1,7 +1,8 @@
 name: 'Terraform Azure User Creation with OIDC'
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
+    types: [workato-trigger]
 
 permissions:
   id-token: write
@@ -37,13 +38,5 @@ jobs:
         TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
         TF_VAR_client_id: ${{ secrets.AZURE_CLIENT_ID }}
         TF_VAR_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-
-    - name: Commit and Push State File
-      run: |
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
-        git add terraform.tfstate
-        git commit -m "Update Terraform state file"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_VAR_username: ${{ github.event.client_payload.username }}
+        
