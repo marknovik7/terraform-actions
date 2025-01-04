@@ -8,4 +8,5 @@ output "object_id" {
 
 output "user_password" {
   value = azuread_user.new_user.password
+  sensitive = true
 }
